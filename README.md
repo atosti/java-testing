@@ -20,9 +20,9 @@ File structure
 
 `MyService.java - The service you wish to test`
 
-`TestMyService.java - The test with a pre-pended name`
+`TestMyService.java - The test with a pre-pended identifier`
 
-`MyServiceTest.java - The test with a post-pended name`
+`MyServiceTest.java - The test with a post-pended identifier`
 
 ## Naming convention of tests
 * Inside your test files, the methods should follow a naming convention similar to:
