@@ -15,6 +15,8 @@ File structure
 
 `package com.site.my; - Tests’ package line`
 
+* It's also required to add the JUnit library to your project in order for the imports to be found by your IDE.
+
 ## Naming convention of files
 * The typical naming convention for tests is pre-pending or post-pending `Test` to the name of the file being testing. This is up to you to decide, but the decision should be _**uniform**_, don't mix these two formats.
 
