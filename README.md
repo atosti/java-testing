@@ -5,29 +5,31 @@ This is a short repository which outlines basic guidelines for unit testing in J
 File structure
 * Create a separate source folder for all your tests which mirrors your project’s structure.
 
-`src/main/java/…	Contains your project`
+`src/main/java/… - Contains your project`
 
-`src/test/java/…	Contains the tests for your project`
+`src/test/java/… - Contains the tests for your project`
 
 * Although the source is kept separate, both the tests and the main code should reside in the same package.
 
-`package com.site.my;	Project’s package line`
+`package com.site.my; - Project’s package line`
 
-`package com.site.my;	Tests’ package line`
+`package com.site.my; - Tests’ package line`
 
 ## Naming convention of files
-* The typical naming convention for tests is pre-pending `Test` to the name of the file being testing.
+* The typical naming convention for tests is pre-pending or post-pending `Test` to the name of the file being testing. This is up to you to decide, but the decision should be _**uniform**_, don't mix these two formats.
 
-`MyService.java		The service you wish to test`
+`MyService.java - The service you wish to test`
 
-`TestMyService.java		The test for MyService`
+`TestMyService.java - The test with a pre-pended name`
+
+`MyServiceTest.java - The test with a post-pended name`
 
 ## Naming convention of tests
-* Inside your test files, the methods should use the following naming convention:
+* Inside your test files, the methods should follow a naming convention similar to:
 
-`MethodName_StateUnderTest_ExpectedBehavior`
+`MethodName_StateUnderTest_ExpectedBehavior - Naming convention`
 
-`e.g. myService_AllParametersNull_AssertReturnsFalse()`
+`myService_AllParametersNull_AssertReturnsFalse() - Example`
 
 ## Mocking and Stubbing
 * Allows you to “call” methods without truly calling a method. Instead, a fake method is called which has a return value hard-coded by you.
