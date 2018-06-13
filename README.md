@@ -10,9 +10,10 @@ This is a short repository which outlines basic guidelines for unit testing in J
 3. File Structure of a project with tests
    * Keep tests separate from the real source code. However, create the internal structure for your tests should mirror your project.
    
-      `src/main/java/… - Contains your project`
-   
-      `src/test/java/… - Contains the tests for your project`
+      ```java
+      src/main/java/…    //Contains your project
+      src/test/java/…    //Contains the tests for your project
+      ```
    
    * Although the tests are in a separate folder, put them in the same **_package_** as your source. This gives your tests the permissions required to perform [reflection](https://docs.oracle.com/javase/tutorial/reflect/), allowing for testing of private methods (should you choose to do so).
 
@@ -25,24 +26,36 @@ It can often become challenging to decide if/when to break a test class into sma
 The two most common conventions are to either prepend or append `Test` to the name of the service being tested. Both have pros/cons which are discussed [here](https://stackoverflow.com/questions/3146821/naming-convention-junit-suffix-or-prefix-test).
    * Whichever you choose, remember to be consistent and ensure your team only uses one or the other (never mix them).
 
-     `TestMyService.java - File name with prepended identifier`
-
-     `MyServiceTest.java - File name with appended identifier`
+      ```java
+      TestMyService.java    //File name with prepended identifier
+      MyServiceTest.java    //File name with appended identifier
+      ```
 
 ### Test naming conventions
 Within your test files, the methods should all be named so that it's immediately evident what is being tested and why a test may have failed. There are many [popular options](https://dzone.com/articles/7-popular-unit-test-naming) for naming, however I've outlined my preference(and the format used in my examples) below.
 
-     `MethodName_StateUnderTest_ExpectedBehavior - Naming convention`
-
-     `myService_AllParametersNull_AssertReturnsFalse() - Example`
+      ```java
+      MethodName_StateUnderTest_ExpectedBehavior(){}        //Naming convention
+      myService_AllParametersNull_AssertReturnsFalse(){}    //Example
+      ```
 
 ## Writing tests
-### Mocking and stubbing
-* Allows you to “call” methods without truly calling a method. Instead, a fake method is called which has a return value hard-coded by you.
+### Mocks
+Mocking is a practice which allows you to avoid calling certain methods, instead faking their responses. It's primarily used for testing features that require calls to databases or third-party services.
+  * It also helps in testing how your code handles failures in connecting to these services.
 
-* Helpful in mocking database or third-party service interactions
-
-`MyRepository myRepo = mock(MyRepository.class);`
+### Stubbing steps
+1. Begin by creating a **_setter injector_** in the actual source code, so that you can inject your mocked item later.
+      
+      ```java
+      private EmployeeRepository employeeRepository;
+      public void setEmployeeRepository(EmployeeRepository employeeRepository){
+          this.employeeRepository = employeeRepository;
+      }
+      ```
+      
+2. Pickup here...
+      `MyRepository myRepo = mock(MyRepository.class);`
 
 * Then use When().ThenReturn() statements to mock for consistent results.
 
