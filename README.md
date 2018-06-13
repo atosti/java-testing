@@ -34,6 +34,8 @@ File structure
 `myService_AllParametersNull_AssertReturnsFalse() - Example`
 
 ## Mocking and Stubbing
+* Follow this [guide](http://www.vogella.com/tutorials/Mockito/article.html#mockito_installation) to install Mockito.
+
 * Allows you to “call” methods without truly calling a method. Instead, a fake method is called which has a return value hard-coded by you.
 
 * Helpful in mocking database or third-party service interactions
