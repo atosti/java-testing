@@ -1,6 +1,12 @@
 # Java Unit Testing
 This is a short repository which outlines basic guidelines for unit testing in Java. Additionally, it includes example files.
 
+## Environment setup
+1. Add the JUnit library to your project in order for the JUnit imports to be found by your IDE.
+    * In Eclipse: `Project > Properties > Java Build Path > Add Library > JUnit > Select JUnit 4 > Finish > Ok`
+2. Install the Mockito dependencies, so its imports can be found.
+    * Follow this [guide](http://www.vogella.com/tutorials/Mockito/article.html#mockito_installation) for more information.
+
 ## Testing Guidelines
 File structure
 * Create a separate source folder for all your tests which mirrors your project’s structure.
@@ -14,8 +20,6 @@ File structure
 `package com.site.my; - Project’s package line`
 
 `package com.site.my; - Tests’ package line`
-
-* It's also required to add the JUnit library to your project in order for the imports to be found by your IDE.
 
 ## Naming convention of files
 * The typical naming convention for tests is pre-pending or post-pending `Test` to the name of the file being testing. This is up to you to decide, but the decision should be _**uniform**_, don't mix these two formats.
@@ -34,8 +38,6 @@ File structure
 `myService_AllParametersNull_AssertReturnsFalse() - Example`
 
 ## Mocking and Stubbing
-* Follow this [guide](http://www.vogella.com/tutorials/Mockito/article.html#mockito_installation) to install Mockito.
-
 * Allows you to “call” methods without truly calling a method. Instead, a fake method is called which has a return value hard-coded by you.
 
 * Helpful in mocking database or third-party service interactions
