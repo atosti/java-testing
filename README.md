@@ -1,5 +1,6 @@
 # Java unit testing
-This is a short repository which outlines basic guidelines for unit testing in Java. Additionally, it includes example files, illustrating how to perform basic tests. This document aims to give you the flexibility to design tests in a manner best suited to you. Overall, remember that consistency is most important when selecting your own standards.
+This is a short repository which outlines basic guidelines for unit testing in Java. Additionally, it includes example files illustrating how to write basic tests. The aim of this document is to give you the flexibility to design tests in a manner best suited to you and your team.
+   * Remember that consistency is most important when selecting your own standards.
 
 ## Environment setup
 1. Add the JUnit library to your project in order for the JUnit imports to be found by your IDE.
