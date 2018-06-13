@@ -16,29 +16,27 @@ This is a short repository which outlines basic guidelines for unit testing in J
    * Although the tests are in a separate folder, put them in the same **_package_** as your source. This gives your tests the permissions required to perform [reflection](https://docs.oracle.com/javase/tutorial/reflect/), allowing for testing of private methods (should you choose to do so).
 
 ## Formatting guidelines
-### Breakdown of Test Files
+### Breaking down test files
 It can often become challenging to decide if/when to break a test class into smaller files focused on examining a single method.
 * One suggestion is to only do this if many tests exist who share common, lengthy setup parameters that could benefit from being in a separate file.
 
-### Naming convention of files
-Select a consistent naming convention
-* The typical naming convention for tests is pre-pending or post-pending `Test` to the name of the file being testing. This is up to you to decide, but the decision should be _**uniform**_, don't mix these two formats.
+### File naming conventions
+The two most common conventions are to either prepend or append `Test` to the name of the service being tested. Both have pros/cons which are discussed [here](https://stackoverflow.com/questions/3146821/naming-convention-junit-suffix-or-prefix-test).
+   * Whichever you choose, remember to be consistent and ensure your team only uses one or the other (never mix them).
 
-`MyService.java - The service you wish to test`
+     `TestMyService.java - File name with prepended identifier`
 
-`TestMyService.java - The test with a pre-pended identifier`
+     `MyServiceTest.java - File name with appended identifier`
 
-`MyServiceTest.java - The test with a post-pended identifier`
+### Test naming conventions
+Within your test files, the methods should all be named so that it's immediately evident what is being tested and why a test may have failed. There are many [popular options](https://dzone.com/articles/7-popular-unit-test-naming) for naming, however I've outlined my preference(and the format used in my examples) below.
 
-## Naming convention of tests
-* Inside your test files, the methods should follow a naming convention similar to:
+     `MethodName_StateUnderTest_ExpectedBehavior - Naming convention`
 
-`MethodName_StateUnderTest_ExpectedBehavior - Naming convention`
+     `myService_AllParametersNull_AssertReturnsFalse() - Example`
 
-`myService_AllParametersNull_AssertReturnsFalse() - Example`
-
-## Writing Tests
-### Mocking and Stubbing
+## Writing tests
+### Mocking and stubbing
 * Allows you to “call” methods without truly calling a method. Instead, a fake method is called which has a return value hard-coded by you.
 
 * Helpful in mocking database or third-party service interactions
