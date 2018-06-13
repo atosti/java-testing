@@ -61,3 +61,6 @@ Having to do this is bad practice, but in legacy applications it can be necessar
 
 Guide to configuring running all tests in a folder
 
+## Tips
+* While designing a test, add an assert that will always fail (e.g. `AssertEquals(false, true)`) to ensure incomplete tests never look as though they're working correctly. This will prevent accidentally pushing broken tests to your repo.
+
