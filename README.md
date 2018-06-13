@@ -1,27 +1,27 @@
-# Java Unit Testing
-This is a short repository which outlines basic guidelines for unit testing in Java. Additionally, it includes example files.
+# Java unit testing
+This is a short repository which outlines basic guidelines for unit testing in Java. Additionally, it includes example files, illustrating how to perform basic tests. This document aims to give you the flexibility to design tests in a manner best suited to you. Overall, remember that consistency is most important when selecting your own standards.
 
 ## Environment setup
 1. Add the JUnit library to your project in order for the JUnit imports to be found by your IDE.
     * In Eclipse: `Project > Properties > Java Build Path > Add Library > JUnit > Select JUnit 4 > Finish > Ok`
 2. Install the Mockito dependencies, so its imports can be found.
     * Follow this [guide](http://www.vogella.com/tutorials/Mockito/article.html#mockito_installation) for more information.
+3. File Structure of a project with tests
+   * Keep tests separate from the real source code. However, create the internal structure for your tests should mirror your project.
+   
+      `src/main/java/… - Contains your project`
+   
+      `src/test/java/… - Contains the tests for your project`
+   
+   * Although the tests are in a separate folder, put them in the same **_package_** as your source. This gives your tests the permissions required to perform [reflection](https://docs.oracle.com/javase/tutorial/reflect/), allowing for testing of private methods (should you choose to do so).
 
-## Testing Guidelines
-File structure
-* Create a separate source folder for all your tests which mirrors your project’s structure.
+## Formatting guidelines
+### Breakdown of Test Files
+It can often become challenging to decide if/when to break a test class into smaller files focused on examining a single method.
+* One suggestion is to only do this if many tests exist who share common, lengthy setup parameters that could benefit from being in a separate file.
 
-`src/main/java/… - Contains your project`
-
-`src/test/java/… - Contains the tests for your project`
-
-* Although the source is kept separate, both the tests and the main code should reside in the same package.
-
-`package com.site.my; - Project’s package line`
-
-`package com.site.my; - Tests’ package line`
-
-## Naming convention of files
+### Naming convention of files
+Select a consistent naming convention
 * The typical naming convention for tests is pre-pending or post-pending `Test` to the name of the file being testing. This is up to you to decide, but the decision should be _**uniform**_, don't mix these two formats.
 
 `MyService.java - The service you wish to test`
@@ -37,7 +37,8 @@ File structure
 
 `myService_AllParametersNull_AssertReturnsFalse() - Example`
 
-## Mocking and Stubbing
+## Writing Tests
+### Mocking and Stubbing
 * Allows you to “call” methods without truly calling a method. Instead, a fake method is called which has a return value hard-coded by you.
 
 * Helpful in mocking database or third-party service interactions
@@ -54,14 +55,14 @@ File structure
 
 * For this to work, the mock must be set within the test, which requires you to create a special method for setting the object to be mocked in your actual source code.
 
-## Reflection
+### Reflection
 Allows for testing of private methods
 
 Requires the source and the test files to share a package.
 
 Having to do this is bad practice, but in legacy applications it can be necessary. Build new code that only requires testing public methods, use this to refactor and test old code sectors.
 
-## Running tests
+### Running tests
 
 Guide to configuring running all tests in a folder
 
