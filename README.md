@@ -32,7 +32,8 @@ The two most common conventions are to either prepend or append `Test` to the na
       ```
 
 ### Test naming conventions
-Within your test files, the methods should all be named so that it's immediately evident what is being tested and why a test may have failed. There are many [popular options](https://dzone.com/articles/7-popular-unit-test-naming) for naming, however I've outlined my preference(and the format used in my examples) below.
+Within your test files, the methods should all be named so that it's immediately evident what is being tested and why a test may have failed.
+  * There are many [popular options](https://dzone.com/articles/7-popular-unit-test-naming) for naming, however I've outlined my preference (and the format used in my examples) below.
 
       ```java
       MethodName_StateUnderTest_ExpectedBehavior(){}        //Naming convention
