@@ -71,11 +71,11 @@ Mocking is a practice which allows you to avoid calling certain methods, instead
     * Note that you cannot mix and match real parameters and matchers, you must use one or the other.
     * The `thenReturn()` function can return any object as long as it matches the return type of the call in `when()`.
 
-      ```java
-      /*In TestMyService.java*/
-      when(employeeRepository.searchDatabase(“Searchterm”).thenReturn(true);
-      when(employeeRepository.searchDatabase(anyString()).thenReturn(true);
-      ```
+     ```java
+     /*In TestMyService.java*/
+     when(employeeRepository.searchDatabase(“Searchterm”).thenReturn(true);
+     when(employeeRepository.searchDatabase(anyString()).thenReturn(true);
+     ```
 
 4. Finally, the mocked object must be injected to the service from within the test method.
 
