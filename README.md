@@ -63,7 +63,7 @@ Mocking is a practice which allows you to avoid calling certain methods, instead
 
       ```java
       /*In TestMyService.java*/
-      EmployeeRepository employeeRepository = mock(EmployeeRepository.class);
+      EmployeeRepository mockedEmployeeRepository = mock(EmployeeRepository.class);
       ```
 
 3. Then, use `when().thenReturn()` statements to hardcode results when calling this object.
@@ -73,16 +73,16 @@ Mocking is a practice which allows you to avoid calling certain methods, instead
 
      ```java
      /*In TestMyService.java*/
-     when(employeeRepository.searchDatabase(“Searchterm”).thenReturn(true);
-     when(employeeRepository.searchDatabase(anyString()).thenReturn(true);
+     when(mockedEmployeeRepository.findByEmployeeId(johnsId)).thenReturn(searchResult);
+     when(mockedEmployeeRepository.findByEmployeeId(anyLong())).thenReturn(searchResult);
      ```
 
 4. Finally, the mocked object must be injected to the service from within the test method.
 
     ```java
     /*In TestMyService.java*/
-    MyService myService = new MyService();                //The service object whose methods you're testing
-    myService.setEmployeeRepository(employeeRepository);  //Calling the injection method
+    MyService myService = new MyService();                      //The service whose methods you're testing
+    myService.setEmployeeRepository(mockedEmployeeRepository);  //Calling the injection method
     ```
 
 ### Reflection
@@ -113,7 +113,7 @@ After all your tests are written, you can run them from your IDE or the command 
 ## Tips
 * While designing a test, set an always failing assert statement to ensure incomplete tests never appear as though they're working.
   * This will reduce the likelihood of pushing unfinished tests into your codebase.
-  * I typically use the following alonmg with a `placeholder` comment, so it's clear why this logic is present in my code.
-    ```java
-    AssertEquals(true, false); //placeholder
-    ```
+  * I also add a `placeholder` comment, so it's clear why this strange logic is present in my code.
+  ```java
+  AssertEquals(true, false); //placeholder
+  ```
