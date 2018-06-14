@@ -96,6 +96,9 @@ After all your tests are written, you can run them from your IDE or the command 
   * In Eclipse: `Right click TestMyService.java > Run As > JUnit Test`
 
 ## Tips
-* While designing a test, set an always failing assert statement (e.g. `AssertEquals(false, true)`) to ensure incomplete tests never appear as though they're working.
+* While designing a test, set an always failing assert statement to ensure incomplete tests never appear as though they're working.
   * This will reduce the likelihood of pushing unfinished tests into your codebase.
-
+  * I typically use the following with the `placeholder` comment, so it's also clear why this logic is present.
+    ```java
+    AssertEquals(true, false); //placeholder
+    ```
