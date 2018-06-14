@@ -24,6 +24,7 @@ It can often become challenging to decide if/when to break a test class into sma
 
 ### File naming conventions
 The two most common conventions are to either prepend or append `Test` to the name of the service being tested. Both have pros/cons which are discussed [here](https://stackoverflow.com/questions/3146821/naming-convention-junit-suffix-or-prefix-test).
+   * For reference, my examples use the prepended version.
    * Whichever you choose, remember to be consistent and ensure your team only uses one or the other (never mix them).
 
       ```java
@@ -37,7 +38,7 @@ Within your test files, the methods should all be named so that it's immediately
 
       ```java
       MethodName_StateUnderTest_ExpectedBehavior(){}        //Naming convention
-      myService_AllParametersNull_AssertReturnsFalse(){}    //Example
+      myService_AllParametersNull_AssertReturnsFalse(){}    //Example method name
       ```
 
 ## Writing tests
@@ -45,40 +46,55 @@ Within your test files, the methods should all be named so that it's immediately
 Mocking is a practice which allows you to avoid calling certain methods, instead faking their responses. It's primarily used for testing features that require calls to databases or third-party services.
   * It also helps in testing how your code handles failures in connecting to these services.
 
-### Stubbing steps
-1. Begin by creating a **_setter injector_** in the actual source code, so that you can inject your mocked item later.
+### Stubbing
+1. Begin by creating a **_setter injector_** in the **_actual_** source code, so that you can inject your mocked items later.
       
       ```java
-      private EmployeeRepository employeeRepository;
+      /*In MyService.java*/
+      private EmployeeRepository employeeRepository; //Some repository item
+      //The setter, which can be injected into later from our test methods
       public void setEmployeeRepository(EmployeeRepository employeeRepository){
           this.employeeRepository = employeeRepository;
       }
       ```
       
-2. Pickup here...
-      `MyRepository myRepo = mock(MyRepository.class);`
+2. Next, in your test method, create a mocked object.
 
-* Then use When().ThenReturn() statements to mock for consistent results.
+      ```java
+      /*In TestMyService.java*/
+      EmployeeRepository employeeRepository = mock(EmployeeRepository.class);
+      ```
 
-`When(myRepo.searchDatabase(“Findme”, 5000L).thenReturn(true);`
+3. Then, use `when().thenReturn()` statements to hardcode results when calling this object.
+    * The `when()` portion can take either particular parameters, or more general [Matchers](https://static.javadoc.io/org.mockito/mockito-core/1.9.5/org/mockito/Matchers.html), which simply match a parameter type.
+    * Note that you cannot mix and match real parameters and matchers, you must use one or the other.
+    * The `thenReturn()` function can return any object as long as it matches the return type of the call in `when()`.
 
-* Additionally, matchers can be used in place of real values. These allow more flexible tests, but you must use either matchers or real values (can’t mix them).
+      ```java
+      /*In TestMyService.java*/
+      when(employeeRepository.searchDatabase(“Searchterm”).thenReturn(true);
+      when(employeeRepository.searchDatabase(anyString()).thenReturn(true);
+      ```
 
-`When(myRepo.searchDatabase(anyString(), anyLong()).thenReturn(true);`
+4. Finally, the mocked object must be injected to the service from within the test method.
 
-* For this to work, the mock must be set within the test, which requires you to create a special method for setting the object to be mocked in your actual source code.
+    ```java
+    /*In TestMyService.java*/
+    MyService myService = new MyService();                //The service object whose methods you're testing
+    myService.setEmployeeRepository(employeeRepository);  //Calling the injection method
+    ```
 
 ### Reflection
-Allows for testing of private methods
+Reflection allows for the testing of private methods. This is a [heated issue](https://stackoverflow.com/questions/34571/how-do-i-test-a-private-function-or-a-class-that-has-private-methods-fields-or) among developers, and should generally be avoided by designing your application to only require testing of public methods. Regardless, it often proves useful in testing legacy code and refactoring old sectors of code.
+  * Note that reflection **_requires_** that the source and test files share a package.
 
-Requires the source and the test files to share a package.
+1. TBD - Add a guide here to match a reflection example in the codebase.
 
-Having to do this is bad practice, but in legacy applications it can be necessary. Build new code that only requires testing public methods, use this to refactor and test old code sectors.
-
-### Running tests
-
-Guide to configuring running all tests in a folder
+## Running tests
+After all your tests are written, you can run them from your IDE or the command line.
+  * In Eclipse: `Right click TestMyService.java > Run As > JUnit Test`
 
 ## Tips
-* While designing a test, add an assert that will always fail (e.g. `AssertEquals(false, true)`) to ensure incomplete tests never look as though they're working correctly. This will prevent accidentally pushing broken tests to your repo.
+* While designing a test, set an always failing assert statement (e.g. `AssertEquals(false, true)`) to ensure incomplete tests never appear as though they're working.
+  * This will reduce the likelihood of pushing unfinished tests into your codebase.
 
