@@ -25,4 +25,9 @@ public class MyService{
         }
         return false;
     }
+    
+    //Typically untestable private method
+    private Long addSecretly(Long a, Long b){
+        return a + b;
+    }
 }
