@@ -1,10 +1,12 @@
 package com.company.app.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 import org.junit.*;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -41,5 +43,25 @@ public class TestMyService{
         boolean result = myService.isJohnSmith(johnsId);
         
         assertEquals(true, result);
+    }
+    
+    @Test
+    public void addSecretly_Add2And5_AssertEquals7() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+        //Setup
+        Long firstNum = 2L;
+        Long secondNum = 5L;
+        Long expected = firstNum + secondNum;
+        
+        //Mocks
+        //Empty...
+        
+        //Results
+        MyService myService = new MyService();
+        //Reflection
+        Method addSecretly = MyService.class.getDeclaredMethod("addSecretly", Long.class, Long.class);
+        addSecretly.setAccessible(true); //Allows us to access it despite it being private
+        Long result = (Long) addSecretly.invoke(myService, firstNum, secondNum);
+        
+        assertEquals(expected, result);
     }
 }
