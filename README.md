@@ -15,7 +15,8 @@ This is a short repository which outlines basic guidelines for unit testing in J
       src/test/java/…    //Contains the tests for your project
       ```
    
-   * Although the tests are in a separate folder, put them in the same **_package_** as your source. This gives your tests the permissions required to perform [reflection](https://docs.oracle.com/javase/tutorial/reflect/), allowing for testing of private methods (should you choose to do so).
+   * Although the tests are in a separate folder, put them in the same **_package_** as your source.
+      * This gives your tests the permissions required to perform [reflection](https://docs.oracle.com/javase/tutorial/reflect/), allowing for the testing of private methods (should you choose to do so).
 
 ## Formatting guidelines
 ### Breaking down test files
