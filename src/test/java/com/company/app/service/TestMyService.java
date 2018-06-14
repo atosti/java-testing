@@ -36,12 +36,12 @@ public class TestMyService{
         searchResult = Optional.of(john); 
         
         //Mocks
-        EmployeeRepository employeeRepository = mock(EmployeeRepository.class);
-        when(employeeRepository.findByEmployeeId(johnsId)).thenReturn(searchResult);
+        EmployeeRepository mockedEmployeeRepository = mock(EmployeeRepository.class);
+        when(mockedEmployeeRepository.findByEmployeeId(johnsId)).thenReturn(searchResult);
         
         //Results
         MyService myService = new MyService();
-        myService.setEmployeeRepository(employeeRepository);
+        myService.setEmployeeRepository(mockedEmployeeRepository);
         boolean result = myService.isJohnSmith(johnsId);
         
         assertEquals(true, result);
@@ -57,12 +57,12 @@ public class TestMyService{
         searchResult = Optional.empty();
         
         //Mocks
-        EmployeeRepository employeeRepository = mock(EmployeeRepository.class);
-        when(employeeRepository.findByEmployeeId(anyLong())).thenReturn(searchResult);
+        EmployeeRepository mockedEmployeeRepository = mock(EmployeeRepository.class);
+        when(mockedEmployeeRepository.findByEmployeeId(anyLong())).thenReturn(searchResult);
         
         //Results
         MyService myService = new MyService();
-        myService.setEmployeeRepository(employeeRepository);
+        myService.setEmployeeRepository(mockedEmployeeRepository);
         boolean result = myService.isJohnSmith(employeeId);
         
         assertEquals(false, result);
