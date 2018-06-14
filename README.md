@@ -89,7 +89,22 @@ Mocking is a practice which allows you to avoid calling certain methods, instead
 Reflection allows for the testing of private methods. This is a [heated issue](https://stackoverflow.com/questions/34571/how-do-i-test-a-private-function-or-a-class-that-has-private-methods-fields-or) among developers, and should generally be avoided by designing your application to only require testing of public methods. Regardless, it often proves useful in testing legacy code and refactoring old sectors of code.
   * Note that reflection **_requires_** that the source and test files share a package.
 
-1. TBD - Add a guide here to match a reflection example in the codebase.
+1. Begin by creating an instance of your service to be tested/
+    ```java
+    MyService myService = new MyService();
+    ```
+2. Next, create a `Method` object and assign it a value with `getDeclaredMethod()`. This takes a String name of the method, and then that method's parameter types as its parameters.
+    ```java
+    Method addSecretly = MyService.class.getDeclaredMethod("addSecretly", Long.class, Long.class);
+    ```
+3. Then, you access this object and set its accessibility. This is the key step, because it gives you access to use the private method.
+    ```java
+    addSecretly.setAccessible(true);
+    ```
+4. Finally, you call the `invoke()` method to actually use your private method. It takes the service your private method resides in and the private method's parameters as its parameters.
+    ```java
+    Long result = (Long) addSecretly.invoke(myService, firstNum, secondNum);
+    ```
 
 ## Running tests
 After all your tests are written, you can run them from your IDE or the command line.
@@ -98,7 +113,7 @@ After all your tests are written, you can run them from your IDE or the command 
 ## Tips
 * While designing a test, set an always failing assert statement to ensure incomplete tests never appear as though they're working.
   * This will reduce the likelihood of pushing unfinished tests into your codebase.
-  * I typically use the following with the `placeholder` comment, so it's also clear why this logic is present.
+  * I typically use the following alonmg with a `placeholder` comment, so it's clear why this logic is present in my code.
     ```java
     AssertEquals(true, false); //placeholder
     ```
