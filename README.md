@@ -89,7 +89,7 @@ Mocking is a practice which allows you to avoid calling certain methods, instead
 Reflection allows for the testing of private methods. This is a [heated issue](https://stackoverflow.com/questions/34571/how-do-i-test-a-private-function-or-a-class-that-has-private-methods-fields-or) among developers, and should generally be avoided by designing your application to only require testing of public methods. Regardless, it often proves useful in testing legacy code and refactoring old sectors of code.
   * Note that reflection **_requires_** that the source and test files share a package.
 
-1. Begin by creating an instance of your service to be tested/
+1. Begin by creating an instance of your service to be tested
     ```java
     MyService myService = new MyService();
     ```
